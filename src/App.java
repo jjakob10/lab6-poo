@@ -1,23 +1,26 @@
 import redeSocial.RedeSocial;
 import redeSocial.User;
+import vizualizaDot.Vizualiza;
 
 public class App {
     public static void main(String[] args) throws Exception {
         RedeSocial ufesbook = new RedeSocial();
 
-        ufesbook.newUser(new User("Alan Texeira", 0));
-        ufesbook.newUser(new User("Fulano de tal", 1));
-        ufesbook.newUser(new User("Ciclano de tal", 2));
-        ufesbook.newUser(new User("Beutrano de tal", 3));
-        ufesbook.newUser(new User("Fulaninha", 4));
-        ufesbook.newUser(new User("Johann", 5));
+        User user1 = ufesbook.newUser("Alan Texeira");
+        User fulano = ufesbook.newUser("Fulano de tal");
+        User a = ufesbook.newUser("Ciclano de tal");
+        User b = ufesbook.newUser("Beutrano de tal");
+        ufesbook.newUser("Fulaninha");
+        ufesbook.newUser("Johann");
 
-        User user1 = ufesbook.getUser(0);
+        a.addFreind(b);
+        b.addFreind(a);
+
         for (User user : ufesbook.getUsers()) {
             user1.addFreind(user);
         }
 
-        ufesbook.removeUser(1);
+        ufesbook.removeUser(fulano);
 
         for (User user : ufesbook.getUsers()) {
             System.out.println("\nOs amigos de " + user.getNome() + " são:");
@@ -26,8 +29,10 @@ public class App {
             }
         }
 
+        Vizualiza v = new Vizualiza();
+        v.criaVisualizacao(ufesbook);
         // for (User friend : user1.getFriends()) {
-        //     System.out.println(friend.getNome());
+        // System.out.println(friend.getNome());
         // }
 
     }

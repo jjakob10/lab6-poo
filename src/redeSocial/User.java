@@ -8,7 +8,7 @@ import java.util.Set;
 public class User {
     private String nome;
     private int uid;
-    private Map<Integer, User> friends = new HashMap<Integer, User>();
+    private Set<User> friends = new HashSet<User>();
 
     public User(String nome, int uid) {
         this.nome = nome;
@@ -24,24 +24,21 @@ public class User {
     }
 
     public Set<User> getFriends() {
-        return new HashSet<User>(friends.values());
+        return new HashSet<User>(friends);
     }
 
-    public User getFriend(int friendId) {
-        return friends.get(friendId);
-    }
-
-    public boolean isFriend(int friendId) {
-        return getFriend(friendId) != null;
+    public boolean isFriend(User friend) {
+        
+        return friends.contains(friend);
     }
 
     public void addFreind(User friend) {
         if (friend.getUid() != this.uid)
-            friends.put(friend.getUid(), friend);
+            friends.add(friend);
     }
 
-    public void removeFriend(int friendId) {
-        friends.remove(friendId);
+    public void removeFriend(User friend) {
+        friends.remove(friend);
     }
 
 }
